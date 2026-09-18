@@ -29,6 +29,10 @@ Configura en `.env`: `APP_URL`, credenciales MySQL, `ARQO_HERO_VIDEO`, `ARQO_WHA
 
 **Admin de prueba:** `admin@arqo.test` / `password`
 
+## Repositorio
+
+https://github.com/AndresDj06/ARQO
+
 ## Versiones
 
 Consulta [CHANGELOG.md](CHANGELOG.md). Las releases se publican con tags `v*` en GitHub.
