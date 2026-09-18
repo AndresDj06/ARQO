@@ -2,6 +2,19 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.3.0] - 2026-09-18
+
+### Changed
+
+- Portafolio: la vista por defecto es la galería de imágenes, con una obra de apertura a sangre completa. El índice de listas pasa a ser la vista secundaria.
+- Nueva paleta «arena» (cálida, papel) como tema por defecto; el grafito oscuro queda tras un botón de tema que recuerda la elección.
+- Composición editorial por láminas: retícula de 12 columnas con anchos, proporciones y desfases que rotan cada seis obras.
+
+### Added
+
+- Botón de tema claro/oscuro en la barra de filtros, con persistencia en `localStorage`.
+- Temas construidos sobre variables CSS, de modo que ambos comparten el mismo juego de clases.
+
 ## [1.2.0] - 2026-09-18
 
 ### Added
@@ -43,6 +56,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y 
 - Animaciones optimizadas (CSS + Motion), admin responsive con menú móvil.
 - MySQL (XAMPP), seeders de demo y video hero en `public/vids`.
 
+[1.3.0]: https://github.com/AndresDj06/ARQO/releases/tag/v1.3.0
 [1.2.0]: https://github.com/AndresDj06/ARQO/releases/tag/v1.2.0
 [1.1.0]: https://github.com/AndresDj06/ARQO/releases/tag/v1.1.0
 [1.0.0]: https://github.com/AndresDj06/ARQO/releases/tag/v1.0.0
