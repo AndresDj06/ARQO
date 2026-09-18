@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import MetroHero from '@/components/ui/scroll-locked-video-hero';
@@ -115,41 +116,44 @@ function ParaMiSection({
     prefs: Prefs;
 }) {
     return (
-        <section id="sobre-mi" className="section-para-mi px-4 py-10 sm:px-5">
+        <section id="sobre-mi" className="section-para-mi band-metal">
             <motion.div
-                className="mx-auto grid max-w-6xl items-center gap-8 overflow-hidden rounded-[2.25rem] px-5 py-10 sm:gap-10 sm:px-6 sm:py-12 md:grid-cols-[0.9fr_1.1fr] md:px-12"
+                className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-14 sm:gap-12 sm:px-5 sm:py-20 md:grid-cols-[0.85fr_1.15fr] md:py-24"
                 initial="hidden"
                 whileInView="show"
                 viewport={viewportOnce}
                 variants={prefs.stagger}
             >
                 <motion.div variants={prefs.fadeUp} className="relative">
-                    <p className="mb-4 text-xs uppercase tracking-[0.32em] text-slate-500 md:hidden">Para mí</p>
-                    <div className="overflow-hidden rounded-[2rem] glass">
+                    <p className="para-mi-kicker mb-4 text-xs uppercase md:hidden">Para mí</p>
+                    <div className="overflow-hidden rounded-[2rem] ring-1 ring-white/15">
                         <img src={mediaUrl(avatar)} alt={nombre ?? 'Arquitecto'} className="aspect-[4/5] w-full object-cover" />
                     </div>
                     {anos ? (
-                        <div className="absolute -bottom-4 right-3 rounded-2xl glass px-4 py-3 sm:-bottom-5 sm:right-4 sm:px-5 sm:py-4">
-                            <p className="font-heading text-2xl text-slate-900 sm:text-3xl">{anos}</p>
-                            <p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">años de práctica</p>
+                        <div className="glass-metal-badge absolute -bottom-4 right-3 rounded-2xl px-4 py-3 sm:-bottom-5 sm:right-4 sm:px-5 sm:py-4">
+                            <p className="para-mi-title font-heading text-2xl sm:text-3xl">{anos}</p>
+                            <p className="para-mi-muted text-[11px] uppercase tracking-[0.16em]">años de práctica</p>
                         </div>
                     ) : null}
                 </motion.div>
                 <div>
-                    <motion.p variants={prefs.fadeUp} className="hidden text-xs uppercase tracking-[0.32em] text-slate-500 md:block">
+                    <motion.p variants={prefs.fadeUp} className="para-mi-kicker hidden text-xs uppercase md:block">
                         Para mí
                     </motion.p>
-                    <motion.h2 variants={prefs.fadeUp} className="font-heading mt-3 text-3xl text-slate-900 sm:text-4xl md:text-6xl">
+                    <motion.h2 variants={prefs.fadeUp} className="para-mi-title font-heading mt-3 text-3xl sm:text-4xl md:text-6xl">
                         {nombre}
                     </motion.h2>
-                    <motion.p variants={prefs.fadeUp} className="mt-2 text-lg text-slate-500">
+                    <motion.p variants={prefs.fadeUp} className="para-mi-muted mt-2 text-lg">
                         {titulo}
                     </motion.p>
-                    <motion.p variants={prefs.fadeUp} className="mt-8 max-w-xl text-lg leading-relaxed text-slate-700">
+                    <motion.p variants={prefs.fadeUp} className="para-mi-body mt-8 max-w-xl text-lg leading-relaxed">
                         {bio}
                     </motion.p>
                     {especialidad ? (
-                        <motion.p variants={prefs.fadeUp} className="mt-8 inline-flex rounded-full border border-white/70 bg-white/35 px-4 py-2 text-xs uppercase tracking-[0.18em] text-slate-600">
+                        <motion.p
+                            variants={prefs.fadeUp}
+                            className="glass-metal-badge para-mi-muted mt-8 inline-flex rounded-full px-4 py-2 text-xs uppercase tracking-[0.18em]"
+                        >
                             {especialidad}
                         </motion.p>
                     ) : null}
@@ -162,29 +166,42 @@ function ParaMiSection({
 function ServiciosSection({ servicios, prefs }: { servicios: Servicio[]; prefs: Prefs }) {
     return (
         <section id="servicios" className="section-servicios mx-auto max-w-6xl px-4 py-16 sm:px-5 md:py-28">
-            <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={prefs.stagger}>
-                <motion.p variants={prefs.fadeUp} className="text-xs tracking-[0.28em] uppercase text-slate-500">
-                    Práctica
-                </motion.p>
-                <motion.h2 variants={prefs.fadeUp} className="font-heading mt-3 text-3xl text-slate-900 sm:text-4xl md:text-6xl">
-                    Cómo trabajamos
-                </motion.h2>
-                <div className="mt-8 divide-y divide-slate-200/80 border-y border-slate-200/80 md:mt-12">
+            <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={viewportOnce}
+                variants={prefs.stagger}
+                className="md:grid md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-14"
+            >
+                <div className="md:sticky md:top-28 md:self-start">
+                    <motion.p variants={prefs.fadeUp} className="text-xs tracking-[0.28em] uppercase text-slate-500">
+                        Práctica
+                    </motion.p>
+                    <motion.h2 variants={prefs.fadeUp} className="font-heading mt-3 text-3xl text-slate-900 sm:text-4xl md:text-5xl">
+                        Cómo trabajamos
+                    </motion.h2>
+                    <motion.p variants={prefs.fadeUp} className="mt-5 max-w-sm text-slate-600">
+                        Un método por etapas: cada encargo avanza del concepto al detalle constructivo.
+                    </motion.p>
+                    <motion.p variants={prefs.fadeUp} className="mt-6 text-xs uppercase tracking-[0.2em] text-slate-400">
+                        {String(servicios.length).padStart(2, '0')} etapas
+                    </motion.p>
+                </div>
+
+                <div className="practice-rail mt-10 md:mt-0">
                     {servicios.map((servicio, index) => (
                         <motion.article
                             id={`servicio-${servicio.id_servicio}`}
                             key={servicio.id_servicio}
                             variants={prefs.fadeUp}
-                            className="group grid gap-2 py-6 transition-transform duration-200 md:grid-cols-[4rem_1fr_1.2fr] md:gap-3 md:py-8 md:hover:translate-x-1"
+                            className="practice-row"
                         >
-                            <p className="font-heading text-xl text-slate-300 transition-colors duration-200 group-hover:text-slate-900 md:text-2xl">
-                                {String(index + 1).padStart(2, '0')}
-                            </p>
-                            <h3 className="font-heading text-2xl text-slate-900 md:text-3xl">{servicio.nombre_servicio}</h3>
-                            <div>
-                                <p className="text-slate-700">{servicio.descripcion_corta}</p>
-                                <p className="mt-2 text-sm leading-relaxed text-slate-500">{servicio.descripcion_detallada}</p>
+                            <div className="flex flex-wrap items-center gap-4">
+                                <span className="practice-index">{String(index + 1).padStart(2, '0')}</span>
+                                <h3 className="practice-title font-heading text-2xl text-slate-900 md:text-3xl">{servicio.nombre_servicio}</h3>
                             </div>
+                            <p className="mt-4 max-w-2xl text-slate-700">{servicio.descripcion_corta}</p>
+                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-500">{servicio.descripcion_detallada}</p>
                         </motion.article>
                     ))}
                 </div>
@@ -208,28 +225,42 @@ function RecursosSection({ recursos, prefs, reduce }: { recursos: Recurso[]; pre
             ) : null}
             <div className="mx-auto max-w-6xl px-4 py-14 sm:px-5 sm:py-20">
                 <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={prefs.stagger}>
-                    <motion.p variants={prefs.fadeUp} className="text-xs tracking-[0.28em] uppercase text-slate-500">
-                        Recursos
-                    </motion.p>
-                    <motion.h2 variants={prefs.fadeUp} className="font-heading mt-3 text-3xl text-slate-900 sm:text-4xl md:text-5xl">
-                        Archivo abierto
-                    </motion.h2>
-                    <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-5">
-                        {recursos.map((recurso) => (
+                    <div className="flex flex-wrap items-end justify-between gap-4">
+                        <div>
+                            <motion.p variants={prefs.fadeUp} className="text-xs tracking-[0.28em] uppercase text-slate-500">
+                                Recursos
+                            </motion.p>
+                            <motion.h2 variants={prefs.fadeUp} className="font-heading mt-3 text-3xl text-slate-900 sm:text-4xl md:text-5xl">
+                                Archivo abierto
+                            </motion.h2>
+                        </div>
+                        <motion.p variants={prefs.fadeUp} className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                            Descargas y lecturas
+                        </motion.p>
+                    </div>
+
+                    <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-6">
+                        {recursos.map((recurso, index) => (
                             <motion.a
                                 key={recurso.id_recurso}
                                 href={recurso.url_enlace}
                                 target="_blank"
                                 rel="noreferrer"
                                 variants={prefs.fadeUp}
-                                className="flex cursor-pointer flex-col justify-between gap-4 rounded-[1.75rem] glass p-5 transition-transform duration-200 sm:p-6 md:flex-row md:items-center md:hover:-translate-y-0.5"
+                                className={`archive-card archive-offset ${index % 2 === 0 ? 'archive-offset-odd' : 'archive-offset-even'} flex cursor-pointer flex-col justify-between gap-5 rounded-[1.75rem] glass p-5 sm:p-7 md:flex-row md:items-end`}
                             >
+                                <span className="archive-ghost" aria-hidden>
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
                                 <div className="min-w-0">
                                     <p className="text-[11px] uppercase tracking-[0.2em] text-slate-500">{recurso.tipo_recurso}</p>
                                     <h3 className="font-heading mt-2 text-2xl text-slate-900 sm:text-3xl">{recurso.titulo_recurso}</h3>
-                                    <p className="mt-2 max-w-xl text-slate-600">{recurso.descripcion}</p>
+                                    <p className="mt-3 max-w-xl text-slate-600">{recurso.descripcion}</p>
                                 </div>
-                                <span className="text-xs uppercase tracking-[0.2em] text-slate-500">Abrir</span>
+                                <span className="flex shrink-0 items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-500">
+                                    Abrir
+                                    <ArrowUpRight className="archive-arrow h-4 w-4" aria-hidden />
+                                </span>
                             </motion.a>
                         ))}
                     </div>

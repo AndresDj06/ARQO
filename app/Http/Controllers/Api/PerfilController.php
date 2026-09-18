@@ -21,13 +21,17 @@ class PerfilController extends Controller
 
     public function update(Request $request): JsonResponse
     {
+        if ($request->input('anos_experiencia') === '' || $request->input('anos_experiencia') === null) {
+            $request->merge(['anos_experiencia' => null]);
+        }
+
         $data = $request->validate([
             'nombre_completo' => ['required', 'string', 'max:100'],
             'titulo_profesional' => ['nullable', 'string', 'max:100'],
             'biografia' => ['nullable', 'string', 'max:1000'],
             'especialidad' => ['nullable', 'string', 'max:150'],
             'anos_experiencia' => ['nullable', 'integer', 'min:0', 'max:80'],
-            'avatar' => ['nullable', 'image', 'max:5120'],
+            'avatar' => ['nullable', 'file', 'image', 'max:5120'],
         ]);
 
         $perfil = PerfilArquitecto::query()->first() ?? new PerfilArquitecto;

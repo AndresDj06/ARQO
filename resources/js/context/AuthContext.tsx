@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import axios from 'axios';
-import { api, csrfCookie } from '@/lib/api';
+import { api, csrfCookie, resetCsrfCookie } from '@/lib/api';
 
 type User = { id: number; name: string; email: string };
 
@@ -40,7 +40,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        api.get('/auth/me')
+        csrfCookie()
+            .then(() => api.get('/auth/me'))
             .then((response) => setUser(response.data.user))
             .catch(() => setUser(null))
             .finally(() => setLoading(false));
@@ -53,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             login: async (email, password) => {
                 await csrfCookie();
                 const response = await api.post('/auth/login', { email, password });
+                await resetCsrfCookie();
                 setUser(response.data.user);
             },
             logout: async () => {

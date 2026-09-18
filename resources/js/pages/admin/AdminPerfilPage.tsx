@@ -1,6 +1,8 @@
+import axios from 'axios';
 import { FormEvent, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { api } from '@/lib/api';
+import { mediaUrl } from '@/lib/utils';
 import type { Perfil } from '@/types';
 
 export default function AdminPerfilPage() {
@@ -12,6 +14,9 @@ export default function AdminPerfilPage() {
         anos_experiencia: '',
     });
     const [avatar, setAvatar] = useState<File | null>(null);
+    const [preview, setPreview] = useState<string | null>(null);
+    const [saved, setSaved] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         api.get('/admin/perfil').then((response) => {
@@ -23,20 +28,40 @@ export default function AdminPerfilPage() {
                 biografia: perfil.biografia ?? '',
                 anos_experiencia: perfil.anos_experiencia?.toString() ?? '',
             });
+            setPreview(mediaUrl(perfil.avatar_url));
         });
     }, []);
 
     async function onSubmit(event: FormEvent) {
         event.preventDefault();
+        setError('');
+        setSaved(false);
         const payload = new FormData();
         Object.entries(form).forEach(([key, value]) => payload.append(key, value));
         if (avatar) payload.append('avatar', avatar);
-        await api.post('/admin/perfil', payload);
+
+        try {
+            const response = await api.post('/admin/perfil', payload);
+            const perfil: Perfil = response.data.perfil;
+            setPreview(mediaUrl(perfil.avatar_url));
+            setAvatar(null);
+            setSaved(true);
+        } catch (caught) {
+            if (axios.isAxiosError(caught)) {
+                const message = (caught.response?.data as { message?: string })?.message;
+                setError(message ?? 'No se pudo guardar el perfil.');
+                return;
+            }
+            setError('No se pudo guardar el perfil.');
+        }
     }
 
     return (
         <form onSubmit={onSubmit} className="mx-auto flex max-w-2xl flex-col gap-4 rounded-3xl glass p-5 sm:p-6">
             <h1 className="font-heading text-3xl">Sobre mí</h1>
+            {preview ? (
+                <img src={preview} alt="Vista previa del avatar" className="aspect-square w-32 rounded-2xl object-cover" />
+            ) : null}
             <input
                 className="field mt-0"
                 value={form.nombre_completo}
@@ -73,15 +98,23 @@ export default function AdminPerfilPage() {
                     <span className="file-field-name">{avatar ? avatar.name : 'Ningún archivo seleccionado'}</span>
                     <input
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg,image/png,image/webp,image/gif"
                         className="sr-only"
-                        onChange={(event) => setAvatar(event.target.files?.[0] ?? null)}
+                        onChange={(event) => {
+                            const file = event.target.files?.[0] ?? null;
+                            setAvatar(file);
+                            if (file) {
+                                setPreview(URL.createObjectURL(file));
+                            }
+                        }}
                     />
                 </label>
                 <Button type="submit" className="w-full shrink-0 sm:w-auto">
                     Guardar perfil
                 </Button>
             </div>
+            {saved ? <p className="text-sm text-slate-600">Perfil guardado. Recarga la home para ver el avatar público.</p> : null}
+            {error ? <p className="text-sm text-red-600">{error}</p> : null}
         </form>
     );
 }
