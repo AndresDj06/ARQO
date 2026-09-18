@@ -8,14 +8,16 @@ import { cn } from '@/lib/utils';
 type Props = {
     servicios: Servicio[];
     recursos: Recurso[];
+    /** Páginas de fondo oscuro usan el tratamiento translúcido y el texto claro. */
+    dark?: boolean;
 };
 
-export default function Navbar({ servicios, recursos }: Props) {
+export default function Navbar({ servicios, recursos, dark = false }: Props) {
     const [open, setOpen] = useState<'servicios' | 'recursos' | null>(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
-    const overHero = location.pathname === '/' && !scrolled;
+    const overHero = (location.pathname === '/' && !scrolled) || dark;
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 24);
@@ -42,7 +44,7 @@ export default function Navbar({ servicios, recursos }: Props) {
     const sheetItem = 'block cursor-pointer rounded-xl px-3 py-2.5 text-sm text-slate-700';
 
     return (
-        <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4 sm:pt-4">
+        <header className="site-nav fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4 sm:pt-4">
             <nav className={cn('mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-3 py-2.5 sm:px-5 sm:py-3', overHero ? 'glass-nav-hero' : 'glass-nav')}>
                 <BrandLogo light={overHero} />
                 <div className="flex items-center gap-1 sm:gap-2 md:hidden">

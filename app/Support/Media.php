@@ -31,36 +31,42 @@ class Media
             mkdir($absoluteDir, 0755, true);
         }
 
+        if (! function_exists('imagecreatefromjpeg')) {
+            $stored = $file->storeAs($directory, $name, 'public');
+
+            return $stored;
+        }
+
         $sourcePath = $file->getRealPath();
-        $info = getimagesize($sourcePath) ?: [0, 0, IMAGETYPE_JPEG];
+        $info = \getimagesize($sourcePath) ?: [0, 0, IMAGETYPE_JPEG];
         $type = $info[2] ?? IMAGETYPE_JPEG;
 
         $source = match ($type) {
-            IMAGETYPE_PNG => imagecreatefrompng($sourcePath),
-            IMAGETYPE_GIF => imagecreatefromgif($sourcePath),
-            IMAGETYPE_WEBP => function_exists('imagecreatefromwebp') ? imagecreatefromwebp($sourcePath) : imagecreatefromjpeg($sourcePath),
-            default => imagecreatefromjpeg($sourcePath),
+            IMAGETYPE_PNG => \imagecreatefrompng($sourcePath),
+            IMAGETYPE_GIF => \imagecreatefromgif($sourcePath),
+            IMAGETYPE_WEBP => function_exists('imagecreatefromwebp') ? \imagecreatefromwebp($sourcePath) : \imagecreatefromjpeg($sourcePath),
+            default => \imagecreatefromjpeg($sourcePath),
         };
 
         if ($source === false) {
-            $file->storeAs($directory, $name, 'public');
+            $stored = $file->storeAs($directory, $name, 'public');
 
-            return $relative;
+            return $stored;
         }
 
-        $width = imagesx($source);
-        $height = imagesy($source);
+        $width = \imagesx($source);
+        $height = \imagesy($source);
 
         if ($width > $maxWidth) {
             $newHeight = (int) round($height * ($maxWidth / $width));
-            $canvas = imagecreatetruecolor($maxWidth, $newHeight);
-            imagecopyresampled($canvas, $source, 0, 0, 0, 0, $maxWidth, $newHeight, $width, $height);
-            imagedestroy($source);
+            $canvas = \imagecreatetruecolor($maxWidth, $newHeight);
+            \imagecopyresampled($canvas, $source, 0, 0, 0, 0, $maxWidth, $newHeight, $width, $height);
+            \imagedestroy($source);
             $source = $canvas;
         }
 
-        imagejpeg($source, storage_path('app/public/'.$relative), 82);
-        imagedestroy($source);
+        \imagejpeg($source, storage_path('app/public/'.$relative), 82);
+        \imagedestroy($source);
 
         return $relative;
     }

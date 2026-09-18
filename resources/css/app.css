@@ -341,6 +341,241 @@ h1, h2, h3, .font-heading {
     }
 }
 
+/* ===================== Portafolio: indice editorial ===================== */
+.portfolio-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(900px 480px at 10% -6%, rgba(104, 126, 150, 0.32), transparent 62%),
+        radial-gradient(780px 420px at 92% 6%, rgba(58, 76, 96, 0.3), transparent 64%),
+        linear-gradient(180deg, #14181d 0%, #1b2128 46%, #0f1318 100%);
+    color: #e2e8f0;
+}
+
+.pf-kicker {
+    color: rgba(226, 232, 240, 0.58);
+    letter-spacing: 0.32em;
+}
+
+.pf-title {
+    color: #f6f8fa;
+}
+
+.pf-body {
+    color: rgba(226, 232, 240, 0.8);
+}
+
+.pf-muted {
+    color: rgba(203, 213, 225, 0.6);
+}
+
+.pf-hairline {
+    height: 1px;
+    transform-origin: left center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.05));
+    animation: hairline 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pf-stat {
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+    padding-left: 1rem;
+}
+
+/* Barra de control adherida bajo la navbar. */
+.pf-bar {
+    position: sticky;
+    top: 5.1rem;
+    z-index: 30;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    background: rgba(18, 22, 28, 0.74);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px) saturate(140%);
+}
+
+.pf-chip {
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(226, 232, 240, 0.72);
+    transition: background 0.28s ease, color 0.28s ease, border-color 0.28s ease, transform 0.28s ease;
+}
+
+.pf-chip:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #f6f8fa;
+}
+
+.pf-chip.is-active {
+    border-color: transparent;
+    background: #f6f8fa;
+    color: #11151b;
+}
+
+.pf-toggle {
+    cursor: pointer;
+    border-radius: 999px;
+    color: rgba(226, 232, 240, 0.6);
+    transition: background 0.28s ease, color 0.28s ease;
+}
+
+.pf-toggle:hover {
+    color: #f6f8fa;
+}
+
+.pf-toggle.is-active {
+    background: rgba(255, 255, 255, 0.14);
+    color: #f6f8fa;
+}
+
+/* Filas del indice. */
+.pf-row {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: baseline;
+    gap: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.4rem 0;
+}
+
+.pf-row:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pf-row > * {
+    position: relative;
+    z-index: 1;
+}
+
+.pf-row::after {
+    content: '';
+    position: absolute;
+    inset: 0 -1.25rem;
+    z-index: 0;
+    border-radius: 1.25rem;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0) 72%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.pf-row:hover::after,
+.pf-row:focus-visible::after {
+    opacity: 1;
+}
+
+.pf-num {
+    font-variant-numeric: tabular-nums;
+    color: rgba(226, 232, 240, 0.32);
+    transition: color 0.3s ease;
+}
+
+.pf-row:hover .pf-num {
+    color: #f6f8fa;
+}
+
+.pf-row-title {
+    color: #f6f8fa;
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pf-row:hover .pf-row-title {
+    transform: translateX(10px);
+}
+
+.pf-row-arrow {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pf-row:hover .pf-row-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Vista previa que sigue al cursor. */
+.pf-cursor-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 45;
+    width: 17rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+/* Mosaico. */
+.pf-tile {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.pf-tile img {
+    filter: saturate(0.92) contrast(1.02);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+}
+
+.pf-tile:hover img {
+    transform: scale(1.045);
+    filter: saturate(1.06) contrast(1.04);
+}
+
+.pf-tile-cap {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 2.5rem 1.25rem 1.2rem;
+    background: linear-gradient(0deg, rgba(8, 11, 15, 0.94) 10%, rgba(8, 11, 15, 0.55) 55%, transparent);
+    opacity: 0.94;
+    transition: opacity 0.35s ease;
+}
+
+.pf-tile:hover .pf-tile-cap {
+    opacity: 1;
+}
+
+.pf-tile-cap-inner {
+    transform: translateY(6px);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pf-tile:hover .pf-tile-cap-inner {
+    transform: translateY(0);
+}
+
+.pf-progress {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 50;
+    height: 2px;
+    transform-origin: 0% 50%;
+    background: linear-gradient(90deg, rgba(246, 248, 250, 0.25), #f6f8fa);
+}
+
+.footer-dark {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px) saturate(130%);
+}
+
+@keyframes hairline {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
 .media-zoom {
     transform: translateZ(0);
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -362,8 +597,10 @@ h1, h2, h3, .font-heading {
     will-change: transform;
 }
 
+/* Sin `both`: al conservar el transform final, .page-stage se volvia el bloque
+   contenedor de la navbar `fixed` y esta dejaba de quedar anclada al viewport. */
 .page-stage {
-    animation: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .admin-drawer {
@@ -489,20 +726,47 @@ h1, h2, h3, .font-heading {
     }
 }
 
+/* La navbar conserva su identidad durante el cambio de pestaña. */
+.site-nav {
+    view-transition-name: site-nav;
+}
+
 ::view-transition-old(root) {
-    animation: page-exit 0.28s ease both;
+    animation: page-exit 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 ::view-transition-new(root) {
-    animation: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: page-reveal 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-group(site-nav) {
+    animation-duration: 0.45s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes page-exit {
     from {
         opacity: 1;
+        transform: scale(1) translate3d(0, 0, 0);
+        filter: blur(0);
     }
     to {
         opacity: 0;
+        transform: scale(0.988) translate3d(0, -12px, 0);
+        filter: blur(3px);
+    }
+}
+
+@keyframes page-reveal {
+    from {
+        opacity: 0;
+        clip-path: inset(14% 0 0 0);
+        transform: translate3d(0, 24px, 0);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -567,10 +831,28 @@ html:active-view-transition .page-stage {
     .archive-ghost,
     .archive-arrow,
     .archive-card:hover .archive-arrow,
-    .archive-card:hover .archive-ghost {
+    .archive-card:hover .archive-ghost,
+    .pf-hairline,
+    .pf-row-title,
+    .pf-row:hover .pf-row-title,
+    .pf-row-arrow,
+    .pf-row:hover .pf-row-arrow,
+    .pf-tile img,
+    .pf-tile:hover img,
+    .pf-tile-cap,
+    .pf-tile:hover .pf-tile-cap,
+    .pf-tile-cap-inner,
+    .pf-tile:hover .pf-tile-cap-inner,
+    .pf-chip,
+    .pf-num {
         animation: none !important;
         transition: none !important;
         transform: none !important;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none !important;
     }
 
     .section-recursos * {

@@ -7,8 +7,8 @@ import { loginErrorMessage, useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
     const { user, loading, login } = useAuth();
-    const [email, setEmail] = useState('admin@arqo.test');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     if (!loading && user) {
@@ -37,11 +37,27 @@ export default function LoginPage() {
                     <h1 className="font-heading mt-2 text-3xl text-slate-900">Entrar a ARQO</h1>
                     <label className="mt-8 block text-sm text-slate-600">
                         Correo
-                        <input className="field" value={email} onChange={(event) => setEmail(event.target.value)} type="email" required />
+                        <input
+                            className="field"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            type="email"
+                            autoComplete="username"
+                            placeholder="tu@correo.com"
+                            required
+                        />
                     </label>
                     <label className="mt-5 block text-sm text-slate-600">
                         Contraseña
-                        <input className="field" value={password} onChange={(event) => setPassword(event.target.value)} type="password" required />
+                        <input
+                            className="field"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                            type="password"
+                            autoComplete="current-password"
+                            placeholder="••••••••"
+                            required
+                        />
                     </label>
                     {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
                     <Button type="submit" className="mt-8 w-full">

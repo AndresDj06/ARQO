@@ -62,37 +62,55 @@ export default function AdminPerfilPage() {
             {preview ? (
                 <img src={preview} alt="Vista previa del avatar" className="aspect-square w-32 rounded-2xl object-cover" />
             ) : null}
-            <input
-                className="field mt-0"
-                value={form.nombre_completo}
-                onChange={(event) => setForm({ ...form, nombre_completo: event.target.value })}
-                required
-            />
-            <input
-                className="field mt-0"
-                placeholder="Título profesional"
-                value={form.titulo_profesional}
-                onChange={(event) => setForm({ ...form, titulo_profesional: event.target.value })}
-            />
-            <input
-                className="field mt-0"
-                placeholder="Especialidad"
-                value={form.especialidad}
-                onChange={(event) => setForm({ ...form, especialidad: event.target.value })}
-            />
-            <textarea
-                className="field mt-0 min-h-32 h-auto py-2"
-                maxLength={1000}
-                value={form.biografia}
-                onChange={(event) => setForm({ ...form, biografia: event.target.value })}
-            />
-            <input
-                className="field mt-0"
-                placeholder="Años de experiencia"
-                value={form.anos_experiencia}
-                onChange={(event) => setForm({ ...form, anos_experiencia: event.target.value })}
-            />
-            <div className="file-row mt-2">
+            <label className="text-sm text-slate-600">
+                Nombre completo
+                <input
+                    className="field mt-2"
+                    value={form.nombre_completo}
+                    onChange={(event) => setForm({ ...form, nombre_completo: event.target.value })}
+                    required
+                />
+            </label>
+            <label className="text-sm text-slate-600">
+                Título profesional
+                <input
+                    className="field mt-2"
+                    placeholder="Ej. Arquitecta"
+                    value={form.titulo_profesional}
+                    onChange={(event) => setForm({ ...form, titulo_profesional: event.target.value })}
+                />
+            </label>
+            <label className="text-sm text-slate-600">
+                Especialidad
+                <input
+                    className="field mt-2"
+                    placeholder="Ej. Residencial y paisajismo"
+                    value={form.especialidad}
+                    onChange={(event) => setForm({ ...form, especialidad: event.target.value })}
+                />
+            </label>
+            <label className="text-sm text-slate-600">
+                Biografía
+                <textarea
+                    className="field mt-2 min-h-32 h-auto py-2"
+                    placeholder="Texto público del apartado Para mí"
+                    maxLength={1000}
+                    value={form.biografia}
+                    onChange={(event) => setForm({ ...form, biografia: event.target.value })}
+                />
+            </label>
+            <label className="text-sm text-slate-600">
+                Años de experiencia
+                <input
+                    className="field mt-2"
+                    inputMode="numeric"
+                    placeholder="Ej. 12"
+                    value={form.anos_experiencia}
+                    onChange={(event) => setForm({ ...form, anos_experiencia: event.target.value })}
+                />
+            </label>
+            <p className="text-sm text-slate-600">Foto del arquitecto</p>
+            <div className="file-row">
                 <label className="file-field">
                     <span className="file-field-btn">Seleccionar archivo</span>
                     <span className="file-field-name">{avatar ? avatar.name : 'Ningún archivo seleccionado'}</span>
