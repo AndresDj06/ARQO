@@ -13,4 +13,4 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y 
 - Animaciones optimizadas (CSS + Motion), admin responsive con menú móvil.
 - MySQL (XAMPP), seeders de demo y video hero en `public/vids`.
 
-[1.0.0]: https://github.com/PLACEHOLDER/arqo/releases/tag/v1.0.0
+[1.0.0]: docs/GITHUB.md
