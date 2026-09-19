@@ -1,7 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import BackButton from '@/components/BackButton';
 import BrandLogo from '@/components/BrandLogo';
 import PageStage from '@/components/PageStage';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -94,10 +93,7 @@ export default function AdminLayout() {
     return (
         <div className="min-h-screen md:grid md:grid-cols-[240px_minmax(0,1fr)]">
             <header className="sticky top-0 z-40 mx-3 mt-3 flex items-center justify-between rounded-2xl glass px-3 py-2 md:hidden">
-                <div className="flex min-w-0 items-center gap-2">
-                    <BackButton fallback="/" />
-                    <BrandLogo className="truncate" />
-                </div>
+                <BrandLogo className="min-w-0 truncate" />
                 <div className="flex shrink-0 items-center gap-1">
                     <ThemeToggle />
                     <button
@@ -126,7 +122,6 @@ export default function AdminLayout() {
                 )}
             >
                 <div className="hidden items-center gap-3 md:flex">
-                    <BackButton fallback="/" />
                     <BrandLogo />
                     <ThemeToggle className="ml-auto" />
                 </div>
