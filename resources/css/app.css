@@ -341,23 +341,6 @@ h1, h2, h3, .font-heading {
     }
 }
 
-/* ===================== Portafolio =====================
-   Usa el mismo lenguaje de vidrio de la home. La variante oscura es opcional
-   y solo cambia el lienzo: la retícula y las tarjetas son las mismas. */
-.portfolio-dark {
-    min-height: 100vh;
-    background:
-        radial-gradient(900px 480px at 10% -6%, rgba(104, 126, 150, 0.32), transparent 62%),
-        radial-gradient(780px 420px at 92% 6%, rgba(58, 76, 96, 0.3), transparent 64%),
-        linear-gradient(180deg, #14181d 0%, #1b2128 46%, #0f1318 100%);
-}
-
-.footer-dark {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(16px) saturate(130%);
-}
-
 .media-zoom {
     transform: translateZ(0);
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -552,6 +535,199 @@ h1, h2, h3, .font-heading {
     }
 }
 
+/* ===================== Tema oscuro (todo el sitio) =====================
+   El botón de la navbar y del panel escribe `data-tema` en <html>. Las vistas
+   se siguen escribiendo con la escala clara y aquí se re-tiñen en un solo
+   sitio: lienzo, vidrios y tonos de texto. Sin `@layer`, estas reglas ganan a
+   las utilidades de Tailwind sin necesidad de `!important`. */
+[data-tema='oscuro'] {
+    --color-ring: #cbd5e1;
+    --ink: #f1f5f9;
+    --ink-soft: rgba(226, 232, 240, 0.88);
+    --ink-body: rgba(203, 213, 225, 0.8);
+    --ink-muted: rgba(176, 190, 205, 0.62);
+    --ink-faint: rgba(148, 163, 184, 0.48);
+}
+
+[data-tema='oscuro'] body {
+    color: var(--ink-body);
+    background:
+        radial-gradient(1200px 600px at 12% -10%, rgba(126, 152, 180, 0.16), transparent 58%),
+        radial-gradient(900px 500px at 90% 8%, rgba(52, 74, 96, 0.28), transparent 54%),
+        linear-gradient(180deg, #11151a 0%, #191f26 48%, #0f1318 100%);
+}
+
+[data-tema='oscuro'] .glass {
+    background: rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+[data-tema='oscuro'] .glass-nav {
+    background: rgba(17, 21, 26, 0.62);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+}
+
+[data-tema='oscuro'] .field,
+[data-tema='oscuro'] .file-field {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+[data-tema='oscuro'] .field {
+    color: #eef3f8;
+}
+
+[data-tema='oscuro'] .field::placeholder {
+    color: rgba(148, 163, 184, 0.55);
+}
+
+[data-tema='oscuro'] .file-field-btn {
+    background: #e8eef4;
+    color: #11151b;
+}
+
+[data-tema='oscuro'] .file-field-name {
+    color: var(--ink-muted);
+}
+
+/* La banda metálica ya era oscura: solo se le refuerza el canto para que siga
+   leyéndose como una franja aparte sobre el lienzo oscuro. */
+[data-tema='oscuro'] .band-metal {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-tema='oscuro'] .practice-rail::before {
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 90%, transparent);
+}
+
+[data-tema='oscuro'] .practice-row + .practice-row {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-tema='oscuro'] .practice-row::before {
+    background: #e2e8f0;
+}
+
+[data-tema='oscuro'] .practice-row::after {
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0) 88%);
+}
+
+[data-tema='oscuro'] .practice-index {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--ink-soft);
+}
+
+[data-tema='oscuro'] .practice-row:hover .practice-index {
+    background: #eaf0f6;
+    color: #11151b;
+}
+
+[data-tema='oscuro'] .section-recursos {
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.05) 45%, transparent 100%);
+}
+
+[data-tema='oscuro'] .archive-card::before {
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 58%);
+}
+
+[data-tema='oscuro'] .archive-card:hover {
+    box-shadow: 0 22px 55px rgba(0, 0, 0, 0.5);
+}
+
+[data-tema='oscuro'] .archive-ghost {
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.16);
+}
+
+[data-tema='oscuro'] .archive-card:hover .archive-ghost {
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.26);
+}
+
+[data-tema='oscuro'] .text-slate-950,
+[data-tema='oscuro'] .text-slate-900 {
+    color: var(--ink);
+}
+
+[data-tema='oscuro'] .text-slate-800,
+[data-tema='oscuro'] .text-slate-700 {
+    color: var(--ink-soft);
+}
+
+[data-tema='oscuro'] .text-slate-600 {
+    color: var(--ink-body);
+}
+
+[data-tema='oscuro'] .text-slate-500 {
+    color: var(--ink-muted);
+}
+
+[data-tema='oscuro'] .text-slate-400 {
+    color: var(--ink-faint);
+}
+
+[data-tema='oscuro'] .hover\:text-slate-950:hover,
+[data-tema='oscuro'] .hover\:text-slate-900:hover {
+    color: #ffffff;
+}
+
+[data-tema='oscuro'] .bg-white\/70,
+[data-tema='oscuro'] .bg-white\/60,
+[data-tema='oscuro'] .bg-white\/50,
+[data-tema='oscuro'] .bg-white\/40,
+[data-tema='oscuro'] .bg-white\/25,
+[data-tema='oscuro'] .bg-slate-200 {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+[data-tema='oscuro'] .hover\:bg-white\/70:hover,
+[data-tema='oscuro'] .hover\:bg-white\/50:hover,
+[data-tema='oscuro'] .hover\:bg-white\/40:hover {
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+/* Botón primario y pestaña activa: el par fondo+texto se invierte junto para
+   no quedar en oscuro sobre oscuro. */
+[data-tema='oscuro'] .bg-slate-900.text-white {
+    background-color: #e9eef4;
+    color: #11151b;
+}
+
+[data-tema='oscuro'] .bg-slate-900.text-white:hover {
+    background-color: #d5dfea;
+}
+
+[data-tema='oscuro'] .border-white\/50,
+[data-tema='oscuro'] .border-white\/40 {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-tema='oscuro'] .border-slate-300,
+[data-tema='oscuro'] .border-slate-200 {
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-tema='oscuro'] .hover\:border-slate-500:hover {
+    border-color: rgba(255, 255, 255, 0.34);
+}
+
+[data-tema='oscuro'] .divide-slate-200\/80 > * + * {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-tema='oscuro'] .text-red-600 {
+    color: #fca5a5;
+}
+
+[data-tema='oscuro'] .bg-red-50 {
+    background-color: rgba(248, 113, 113, 0.12);
+}
+
 @media (min-width: 640px) {
     .file-row {
         flex-direction: row;
@@ -594,6 +770,13 @@ html:active-view-transition .page-stage {
         background: #ffffff;
         backdrop-filter: none;
     }
+
+    [data-tema='oscuro'] .glass,
+    [data-tema='oscuro'] .glass-nav,
+    [data-tema='oscuro'] .glass-nav-hero {
+        background: #181d24;
+        backdrop-filter: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -614,11 +797,6 @@ html:active-view-transition .page-stage {
     .archive-arrow,
     .archive-card:hover .archive-arrow,
     .archive-card:hover .archive-ghost,
-    .pf-hairline,
-    .pf-row-title,
-    .pf-row:hover .pf-row-title,
-    .pf-row-arrow,
-    .pf-row:hover .pf-row-arrow,
     .portfolio-card img,
     .portfolio-card:hover img {
         animation: none !important;

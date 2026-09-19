@@ -4,6 +4,7 @@ import { Navigate, NavLink, Outlet, useLocation, useNavigate } from 'react-route
 import BackButton from '@/components/BackButton';
 import BrandLogo from '@/components/BrandLogo';
 import PageStage from '@/components/PageStage';
+import ThemeToggle from '@/components/ThemeToggle';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/utils';
 
@@ -97,15 +98,18 @@ export default function AdminLayout() {
                     <BackButton fallback="/" />
                     <BrandLogo className="truncate" />
                 </div>
-                <button
-                    type="button"
-                    className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
-                    aria-expanded={menuOpen}
-                    aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-                    onClick={() => setMenuOpen((open) => !open)}
-                >
-                    {menuOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
-                </button>
+                <div className="flex shrink-0 items-center gap-1">
+                    <ThemeToggle />
+                    <button
+                        type="button"
+                        className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full"
+                        aria-expanded={menuOpen}
+                        aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+                        onClick={() => setMenuOpen((open) => !open)}
+                    >
+                        {menuOpen ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
+                    </button>
+                </div>
             </header>
 
             <button
@@ -124,6 +128,7 @@ export default function AdminLayout() {
                 <div className="hidden items-center gap-3 md:flex">
                     <BackButton fallback="/" />
                     <BrandLogo />
+                    <ThemeToggle className="ml-auto" />
                 </div>
                 <div className="flex items-center justify-between md:hidden">
                     <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Menú</p>

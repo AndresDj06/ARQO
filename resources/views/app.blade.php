@@ -6,6 +6,17 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="app-basename" content="{{ $webBase ?? '/' }}">
         <title>{{ config('app.name', 'ARQO') }}</title>
+        {{-- El tema se aplica antes de pintar para que no se vea un parpadeo claro al recargar. --}}
+        <script>
+            (function () {
+                var tema = 'claro';
+                try {
+                    if (localStorage.getItem('arqo-tema') === 'oscuro') tema = 'oscuro';
+                } catch (error) {}
+                document.documentElement.dataset.tema = tema;
+                document.documentElement.style.colorScheme = tema === 'oscuro' ? 'dark' : 'light';
+            })();
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">

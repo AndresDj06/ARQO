@@ -2,6 +2,19 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.5.0] - 2026-09-18
+
+### Added
+
+- Tema oscuro para todo ARQO: landing, portafolio, detalle de obra, login y panel de administración. El botón vive en la navbar pública y en la cabecera del panel.
+- La preferencia se guarda por visitante en `localStorage` (`arqo-tema`), así que se mantiene al navegar, al recargar y entre sesiones del mismo navegador. Un visitante nuevo entra en claro.
+- El tema se aplica desde la plantilla Blade antes de pintar, de modo que al recargar no se ve el destello claro.
+- Si se cambia el tema en otra pestaña, las demás lo adoptan.
+
+### Changed
+
+- El tema dejó de ser local del portafolio: `Navbar` y `SiteFooter` ya no reciben props de tono y las vistas se escriben una sola vez con la escala clara; el CSS re-tiñe lienzo, vidrios y textos bajo `[data-tema='oscuro']`.
+
 ## [1.4.0] - 2026-09-18
 
 ### Changed

@@ -2,22 +2,21 @@ import { ChevronDown, CircleUser, Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import BrandLogo from '@/components/BrandLogo';
+import ThemeToggle from '@/components/ThemeToggle';
 import type { Recurso, Servicio } from '@/types';
 import { cn } from '@/lib/utils';
 
 type Props = {
     servicios: Servicio[];
     recursos: Recurso[];
-    /** Páginas de fondo oscuro usan el tratamiento translúcido y el texto claro. */
-    dark?: boolean;
 };
 
-export default function Navbar({ servicios, recursos, dark = false }: Props) {
+export default function Navbar({ servicios, recursos }: Props) {
     const [open, setOpen] = useState<'servicios' | 'recursos' | null>(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
-    const overHero = (location.pathname === '/' && !scrolled) || dark;
+    const overHero = location.pathname === '/' && !scrolled;
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 24);
@@ -48,6 +47,7 @@ export default function Navbar({ servicios, recursos, dark = false }: Props) {
             <nav className={cn('mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-3 py-2.5 sm:px-5 sm:py-3', overHero ? 'glass-nav-hero' : 'glass-nav')}>
                 <BrandLogo light={overHero} />
                 <div className="flex items-center gap-1 sm:gap-2 md:hidden">
+                    <ThemeToggle light={overHero} />
                     <button
                         type="button"
                         className={accountClass}
@@ -113,6 +113,7 @@ export default function Navbar({ servicios, recursos, dark = false }: Props) {
                             )}
                         </div>
                     )}
+                    <ThemeToggle light={overHero} />
                     <NavLink to="/login" viewTransition aria-label="Iniciar sesión" className={accountClass}>
                         <CircleUser className="h-5 w-5" aria-hidden />
                     </NavLink>

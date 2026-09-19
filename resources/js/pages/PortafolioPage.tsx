@@ -1,26 +1,13 @@
-import { Moon, Sun } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import SiteFooter from '@/components/SiteFooter';
 import { useLanding } from '@/hooks/useLanding';
-import { cn, mediaUrl } from '@/lib/utils';
-
-type Tema = 'claro' | 'grafito';
-
-const TEMA_KEY = 'arqo-portafolio-tema';
+import { mediaUrl } from '@/lib/utils';
 
 export default function PortafolioPage() {
     const data = useLanding();
     const [categoria, setCategoria] = useState<string>('todos');
-    // Se lee en la inicialización para no mostrar un parpadeo del tema claro al recargar.
-    const [tema, setTema] = useState<Tema>(() => (window.localStorage.getItem(TEMA_KEY) === 'grafito' ? 'grafito' : 'claro'));
-
-    useEffect(() => {
-        window.localStorage.setItem(TEMA_KEY, tema);
-    }, [tema]);
-
-    const oscuro = tema === 'grafito';
 
     const categorias = useMemo(() => {
         const names = new Set(
@@ -42,57 +29,28 @@ export default function PortafolioPage() {
     }
 
     return (
-        <div className={oscuro ? 'portfolio-dark' : undefined}>
-            <Navbar servicios={data.servicios} recursos={data.recursos} dark={oscuro} />
+        <div>
+            <Navbar servicios={data.servicios} recursos={data.recursos} />
             <main className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-5 sm:pt-32">
-                <p className={cn('text-xs tracking-[0.28em] uppercase', oscuro ? 'text-white/55' : 'text-slate-500')}>Portafolio</p>
-                <h1
-                    className={cn(
-                        'font-heading mt-3 max-w-3xl text-3xl sm:text-5xl md:text-6xl',
-                        oscuro ? 'text-white' : 'text-slate-900',
-                    )}
-                >
-                    Compendio de proyectos
-                </h1>
-                <p className={cn('mt-5 max-w-2xl text-lg', oscuro ? 'text-white/70' : 'text-slate-600')}>
+                <p className="text-xs tracking-[0.28em] uppercase text-slate-500">Portafolio</p>
+                <h1 className="font-heading mt-3 max-w-3xl text-3xl text-slate-900 sm:text-5xl md:text-6xl">Compendio de proyectos</h1>
+                <p className="mt-5 max-w-2xl text-lg text-slate-600">
                     Cada publicación sale del panel de administración. Fotografía amplia, ficha técnica y una lectura continua del encargo.
                 </p>
 
-                <div className="mt-10 flex flex-wrap items-center gap-2">
+                <div className="mt-10 flex flex-wrap gap-2">
                     {categorias.map((name) => (
                         <button
                             key={name}
                             type="button"
                             onClick={() => setCategoria(name)}
-                            className={cn(
-                                'cursor-pointer rounded-full px-4 py-2 text-xs uppercase tracking-[0.16em] transition-colors duration-200',
-                                categoria === name
-                                    ? oscuro
-                                        ? 'bg-white text-slate-900'
-                                        : 'bg-slate-900 text-white'
-                                    : oscuro
-                                      ? 'border border-white/15 bg-white/5 text-white/70 hover:bg-white/15'
-                                      : 'glass text-slate-600 hover:bg-white/70',
-                            )}
+                            className={`cursor-pointer rounded-full px-4 py-2 text-xs uppercase tracking-[0.16em] transition-colors duration-200 ${
+                                categoria === name ? 'bg-slate-900 text-white' : 'glass text-slate-600 hover:bg-white/70'
+                            }`}
                         >
                             {name}
                         </button>
                     ))}
-                    <button
-                        type="button"
-                        onClick={() => setTema(oscuro ? 'claro' : 'grafito')}
-                        aria-label={oscuro ? 'Activar tema claro' : 'Activar tema oscuro'}
-                        title={oscuro ? 'Tema claro' : 'Tema oscuro'}
-                        className={cn(
-                            'ml-auto flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-xs uppercase tracking-[0.16em] transition-colors duration-200',
-                            oscuro
-                                ? 'border border-white/15 bg-white/5 text-white/70 hover:bg-white/15'
-                                : 'glass text-slate-600 hover:bg-white/70',
-                        )}
-                    >
-                        {oscuro ? <Sun className="h-4 w-4" aria-hidden /> : <Moon className="h-4 w-4" aria-hidden />}
-                        <span className="hidden sm:inline">{oscuro ? 'Claro' : 'Oscuro'}</span>
-                    </button>
                 </div>
 
                 <div className="mt-14 columns-1 gap-10 md:columns-2">
@@ -103,12 +61,7 @@ export default function PortafolioPage() {
                             viewTransition
                             className="portfolio-card group mb-10 block break-inside-avoid cursor-pointer"
                         >
-                            <div
-                                className={cn(
-                                    'overflow-hidden rounded-[1.5rem]',
-                                    oscuro ? 'border border-white/10 bg-white/5' : 'glass',
-                                )}
-                            >
+                            <div className="overflow-hidden rounded-[1.5rem] glass">
                                 <img
                                     src={mediaUrl(proyecto.miniatura_url)}
                                     alt={proyecto.titulo}
@@ -116,22 +69,15 @@ export default function PortafolioPage() {
                                 />
                             </div>
                             <div className="mt-4 flex items-baseline justify-between gap-4">
-                                <h2 className={cn('font-heading text-2xl', oscuro ? 'text-white' : 'text-slate-900')}>{proyecto.titulo}</h2>
-                                <span
-                                    className={cn(
-                                        'text-xs uppercase tracking-[0.16em]',
-                                        oscuro ? 'text-white/55' : 'text-slate-500',
-                                    )}
-                                >
-                                    {proyecto.categoria?.nombre_categoria}
-                                </span>
+                                <h2 className="font-heading text-2xl text-slate-900">{proyecto.titulo}</h2>
+                                <span className="text-xs uppercase tracking-[0.16em] text-slate-500">{proyecto.categoria?.nombre_categoria}</span>
                             </div>
-                            <p className={cn('mt-1 text-sm', oscuro ? 'text-white/55' : 'text-slate-500')}>{proyecto.ubicacion}</p>
+                            <p className="mt-1 text-sm text-slate-500">{proyecto.ubicacion}</p>
                         </Link>
                     ))}
                 </div>
             </main>
-            <SiteFooter pie={data.pie} tone={oscuro ? 'dark' : 'light'} />
+            <SiteFooter pie={data.pie} />
         </div>
     );
 }
