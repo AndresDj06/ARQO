@@ -2,6 +2,17 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.4.0] - 2026-09-18
+
+### Changed
+
+- Portafolio: se recupera el diseño de la v1.0.0 (mosaico a dos columnas con el mismo vidrio de la home, chips de categoría y fotografía sin recortes fijos). Se retiran la apertura a sangre completa, la paleta arena, las láminas de 12 columnas, el índice de listas, la vista previa que seguía al cursor y la barra de progreso.
+- El tema oscuro se conserva como alternativa: el botón solo cambia el lienzo y los colores de texto, la retícula es la misma en ambos temas.
+
+### Removed
+
+- Hoja de estilos del portafolio editorial (`.pf-*`): unas 300 líneas de CSS que dejaron de usarse.
+
 ## [1.3.0] - 2026-09-18
 
 ### Changed
