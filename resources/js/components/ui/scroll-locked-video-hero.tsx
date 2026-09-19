@@ -18,7 +18,8 @@ const appRoot = (typeof document !== "undefined"
   : "/"
 ).replace(/\/$/, "");
 const DEFAULT_VIDEO = `${appRoot}/vids/construccion.mp4`;
-const SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+const SANS = "'Space Grotesk', ui-sans-serif, system-ui, sans-serif";
+const HERO = "'Cormorant Garamond', 'Times New Roman', ui-serif, serif";
 const COL_BG = "#05070d";
 const COL_TEXT = "#f2f4f8";
 
@@ -323,13 +324,14 @@ export default function MetroHero({
       >
         <span
           style={{
-            fontFamily: SANS,
-            fontWeight: 800,
-            fontSize: "clamp(30px, 7vw, 96px)",
-            lineHeight: 1,
-            letterSpacing: "-0.02em",
+            fontFamily: HERO,
+            fontWeight: 300,
+            fontSize: "clamp(2.75rem, 9vw, 6.5rem)",
+            lineHeight: 0.95,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
             color: COL_TEXT,
-            textShadow: "0 4px 30px rgba(0,0,0,0.5)",
+            textShadow: "0 2px 28px rgba(0,0,0,0.45)",
             display: "inline-block",
             willChange: "transform, filter, opacity",
           }}
@@ -355,13 +357,14 @@ export default function MetroHero({
         >
           <span
             style={{
-              fontFamily: SANS,
-              fontWeight: 700,
-              fontSize: "clamp(20px, 3.4vw, 40px)",
-              lineHeight: 1.2,
-              letterSpacing: "-0.01em",
-              color: COL_TEXT,
-              textShadow: "0 4px 24px rgba(0,0,0,0.5)",
+              fontFamily: HERO,
+              fontWeight: 400,
+              fontStyle: "italic",
+              fontSize: "clamp(1.25rem, 2.8vw, 2.15rem)",
+              lineHeight: 1.35,
+              letterSpacing: "0.02em",
+              color: "rgba(242, 244, 248, 0.92)",
+              textShadow: "0 2px 20px rgba(0,0,0,0.45)",
             }}
           >
             {tagline}
@@ -383,8 +386,8 @@ export default function MetroHero({
           color: "rgba(240,244,248,0.75)",
           fontFamily: SANS,
           fontSize: "clamp(10px, 1.4vw, 12px)",
-          fontWeight: 600,
-          letterSpacing: "0.3em",
+          fontWeight: 400,
+          letterSpacing: "0.32em",
           transition: "opacity 0.4s ease",
           pointerEvents: "none",
         }}

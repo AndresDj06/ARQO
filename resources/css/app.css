@@ -11,6 +11,7 @@
 @theme {
     --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
     --font-heading: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --font-hero: 'Cormorant Garamond', 'Times New Roman', ui-serif, serif;
     --color-background: #eef2f6;
     --color-foreground: #1e293b;
     --color-primary: #334155;

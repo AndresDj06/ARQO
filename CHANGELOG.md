@@ -2,6 +2,12 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/) y versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.5.1] - 2026-09-18
+
+### Changed
+
+- Hero: tipografía Cormorant Garamond (peso ligero) para el título y la tagline al hacer scroll; el indicador «SCROLL» usa Space Grotesk. Token `--font-hero` en el tema CSS.
+
 ## [1.5.0] - 2026-09-18
 
 ### Added
